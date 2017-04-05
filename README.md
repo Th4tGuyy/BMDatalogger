@@ -15,7 +15,7 @@ The BMDatalogger is made to datalog Ectune ISR V3 protocol with the Adruino Nano
 
 IF USING BLUETOOTH :
 - 2x HC05 Bluetooth module
-- FT232RL FTDI to USD module (this also replace hulog for 2$)
+- FT232RL FTDI to USB module (this also replace hulog for 2$)
 
 # Wiring Diagram :
 
