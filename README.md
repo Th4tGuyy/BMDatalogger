@@ -9,7 +9,7 @@ The BMDatalogger is made to datalog Ectune ISR V3 protocol with the Adruino Nano
 - Arduino Nano
 - LCD Display (16x2 or 20x4)
 - LCD I2C Serial Adapter
-- 2x Buttons
+- 2x Push Buttons
 - OBD1 ecu chipped, tuned under Ectune
 - CN2 port ready
 - Wires
