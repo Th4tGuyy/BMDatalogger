@@ -59,21 +59,21 @@ Ecu::Ecu(){
 }
 
 void Ecu::Connect() {
-	Serial3.begin(38400);
+	Serial.begin(38400);
 	Error = false;
 }
 
 void Ecu::Disconnect() {
-	Serial3.end();
+	Serial.end();
 	Error = false;
 }
 
 bool Ecu::GetJ12Cut() {
 	J12_Cut = true;
 	
-	Serial3.write((byte) 171);
-	if ((int) Serial3.read() != 205) {
-		//Serial3.end();
+	Serial.write((byte) 171);
+	if ((int) Serial.read() != 205) {
+		//Serial.end();
 		J12_Cut = false;
 		Error = true;
 	}
@@ -81,25 +81,25 @@ bool Ecu::GetJ12Cut() {
 }
 
 void Ecu::GetData(){
-	while(Serial3.available()) {
+	while(Serial.available()) {
 	  for (int i = 0; i < Array_Size; i++){
-		Datalog_Bytes[i] = Serial3.read();
+		Datalog_Bytes[i] = Serial.read();
 		delay(1);
 	  }
 	}
-	Serial3.flush();
-	Serial3.write(" ");
+	Serial.flush();
+	Serial.write(" ");
 }
 
 void Ecu::SendRead(){
 	unsigned long PreviousTimeRead = millis();
 	
-	Serial3.flush();
-	Serial3.write(" ");
+	Serial.flush();
+	Serial.write(" ");
 	
 	unsigned long PreviousTime = millis();
 	unsigned long Time = millis() - PreviousTime;
-	while(Serial3.available() != Array_Size && (Time < Timeout_Time)) Time = millis() - PreviousTime;
+	while(Serial.available() != Array_Size && (Time < Timeout_Time)) Time = millis() - PreviousTime;
   
 	if (Time >= Timeout_Time) {
 		for (int i = 0; i < Array_Size; i++)
@@ -110,7 +110,7 @@ void Ecu::SendRead(){
 	}
 	
 	for (int i = 0; i < Array_Size; i++){
-		Datalog_Bytes[i] = Serial3.read();
+		Datalog_Bytes[i] = Serial.read();
 		delay(1);
 	}
 	
@@ -120,17 +120,17 @@ void Ecu::SendRead(){
 }
 
 /*void Ecu::Send(){
-	Serial3.flush();
-	Serial3.write(" ");
+	Serial.flush();
+	Serial.write(" ");
 }
 
 void Ecu::Read(){
 	Error = false;
 	unsigned long PreviousTimeRead = millis();
 	
-	if (Serial3.available() >= Array_Size) {
+	if (Serial.available() >= Array_Size) {
 		for (int i = 0; i < Array_Size; i++){
-			Datalog_Bytes[i] = Serial3.read();
+			Datalog_Bytes[i] = Serial.read();
 			//delay(1);
 		}
 	} else {
@@ -144,9 +144,9 @@ void Ecu::ReadAvailable(){
 	Error = false;
 	unsigned long PreviousTimeRead = millis();
 	
-	if (Serial3.available() > 0) {
-		for (int i = 0; i < Serial3.available(); i++){
-			Datalog_Bytes[i] = Serial3.read();
+	if (Serial.available() > 0) {
+		for (int i = 0; i < Serial.available(); i++){
+			Datalog_Bytes[i] = Serial.read();
 			//delay(1);
 		}
 	} else {
@@ -157,7 +157,7 @@ void Ecu::ReadAvailable(){
 }
 
 int Ecu::GetAvailable() {
-	return (int) Serial3.available();
+	return (int) Serial.available();
 }
 
 int Ecu::GetReadTime() {

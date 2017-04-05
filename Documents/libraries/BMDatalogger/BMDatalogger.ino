@@ -47,7 +47,7 @@
 //#####################################################
 //#####################################################
 
-String VersionStr = "V1.0.4";
+String VersionStr = "V1.0.5";
 bool BypassJ12Error = false;
 bool Is20x04Screen = false;     //Set to True is you run on a 20x04 Screen otherwise its a 16x02
 int InjectorsSize = 450;
@@ -55,17 +55,19 @@ int TrannyType = 5;
 
 //Load Modules
 #include "Wire.h"
-#include "LiquidCrystal.h"
+//#include "LiquidCrystal.h"
+#include <LiquidCrystal_I2C.h>
 #include "Ecu.h"
-#include <LcdBarGraph.h>
+//#include <LcdBarGraph.h>
 #include <stdio.h>
 #include <avr/pgmspace.h>
 Ecu ecu;
 
 //Set Inputs
-LiquidCrystal lcd(12, 11, 10, 9, 8, 7);
-int TopButton = 6;
-int BottomButton = 5;
+//LiquidCrystal lcd(12, 11, 10, 9, 8, 7);
+LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
+int TopButton = 7;
+int BottomButton = 6;
 
 //Buttons Vars
 #define ON 1
